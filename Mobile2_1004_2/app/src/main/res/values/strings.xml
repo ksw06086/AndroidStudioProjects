@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mobile2_1004_2</string>
+    <string name="gender">성별</string>
+    <string name="male">남성</string>
+    <string name="female">여성</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mobile2_1004_3</string>
+    <string name="text_start">선택을 시작하시겠습니까?</string>
+    <string name="check_start">시작함</string>
+    <string name="text_ani">좋아하는 캐릭터는?</string>
+    <string name="radio_kato">카토</string>
+    <string name="radio_mizuhara">미즈하라</string>
+    <string name="radio_man">잘생긴 남주</string>
+    <string name="btn_end">종료</string>
+    <string name="btn_start">처음으로</string>
+
+</resources>

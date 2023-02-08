@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="서랍장 바깥쪽"
+        android:textSize="25sp"
+        android:textColor="#ff00ff"/>
+    <SlidingDrawer
+        android:handle="@+id/btn_handle"
+        android:content="@+id/linear_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서랍손잡이"/>
+
+        <LinearLayout
+            android:id="@+id/linear_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#9194ff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여기는 서랍 안쪽입니다."
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"/>
+
+        </LinearLayout>
+
+    </SlidingDrawer>
+</LinearLayout>

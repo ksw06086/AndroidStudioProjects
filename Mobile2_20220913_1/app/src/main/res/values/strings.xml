@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mobile2_20220913_1</string>
+    <string name="homepage">Home Page 열기</string>
+    <string name="call_phone">친구에게 전화걸기</string>
+    <string name="gallery">갤러리 열기</string>
+    <string name="finish">앱종료</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/homepage"
+        android:backgroundTint="@color/btn_home"
+        />
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/call_phone"
+        android:backgroundTint="@color/btn_call"
+        />
+    <Button
+        android:id="@+id/btn_gall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        android:backgroundTint="@color/btn_gallery"
+        />
+    <Button
+        android:id="@+id/btn_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finish"
+        android:backgroundTint="@color/btn_finish"
+        />
+
+</LinearLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mobile_20220927_1</string>
+    <string name="toate_error1">값이 입력되지 않았습니다.</string>
+    <string name="toate_error2">0으로 나눌 수는 없습니다.</string>
+</resources>

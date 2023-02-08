@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Mobile2_20220920_1</string>
+    <string name="text1">아래의 이름을 입력:</string>
+    <string name="edit1">여기에 이름을 쓰세요.</string>
+    <string name="btn1">확인</string>
+</resources>

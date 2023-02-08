@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mobile2_1108</string>
+    <string name="radio_date">날짜설정(캘린더뷰)</string>
+    <string name="radio_time">시간설정</string>
+</resources>
