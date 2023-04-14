@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "477533354081",
+    "project_id": "howitalk-90e5f",
+    "storage_bucket": "howitalk-90e5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477533354081:android:2d4ddb6a4b33c2b5561220",
+        "android_client_info": {
+          "package_name": "kr.ac.yuhan.sun.howitalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477533354081-u498ptsqb2ghfcq9if40h19qhc57sntb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3vBuV_XRBJEyy83rpqrPcRGwpEzrcZgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477533354081-u498ptsqb2ghfcq9if40h19qhc57sntb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
