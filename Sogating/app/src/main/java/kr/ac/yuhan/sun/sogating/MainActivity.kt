@@ -1,6 +1,10 @@
 package kr.ac.yuhan.sun.sogating
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +12,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.ktx.auth
@@ -175,6 +181,8 @@ class MainActivity : AppCompatActivity() {
                     val likeUserKey = dataModel.key.toString()
                     if(likeUserKey.equals(uid)){
                         Toast.makeText(this@MainActivity, "좋아요한 상대가 00님을 좋아요 했습니다.", Toast.LENGTH_SHORT).show()
+                        createNotificationChannel()
+                        sendNotification()
                     }
 
                 }
@@ -187,4 +195,35 @@ class MainActivity : AppCompatActivity() {
         }
         FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
+
+    // notification
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "name"
+            val descriptionText = "description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("Test_Channel", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun sendNotification(){
+        var builder = NotificationCompat.Builder(this, "Test_Channel")
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle("매칭완료")
+            .setContentText("매칭이 완료되었습니다. 상대도 나를 좋아합니다.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        with(NotificationManagerCompat.from(this)){
+            notify(123, builder.build())
+        }
+    }
+
+
 }
