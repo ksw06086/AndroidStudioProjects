@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogating">
         <activity
+            android:name=".message.MyMatchingListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".message.MyLikeListActivity"
+            android:exported="false" />
+        <activity
             android:name=".setting.SettingActivity"
             android:exported="false" />
         <activity

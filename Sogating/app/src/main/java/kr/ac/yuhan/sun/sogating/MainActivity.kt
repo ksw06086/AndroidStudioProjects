@@ -197,6 +197,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // notification
+    // 채널 생성하는 부분
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -214,6 +215,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 나에게 알람메시지 보내는 부분
     private fun sendNotification(){
         var builder = NotificationCompat.Builder(this, "Test_Channel")
             .setSmallIcon(R.drawable.ic_launcher_background)

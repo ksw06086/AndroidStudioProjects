@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kr.ac.yuhan.sun.sogating.R
 import kr.ac.yuhan.sun.sogating.auth.IntroActivity
+import kr.ac.yuhan.sun.sogating.message.MyMatchingListActivity
 
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,12 @@ class SettingActivity : AppCompatActivity() {
         val myPageBtn = findViewById<Button>(R.id.myPageBtn)
         myPageBtn.setOnClickListener {
             val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        val myMatchingListBtn = findViewById<Button>(R.id.myMatchingListBtn)
+        myMatchingListBtn.setOnClickListener {
+            val intent = Intent(this, MyMatchingListActivity::class.java)
             startActivity(intent)
         }
 
