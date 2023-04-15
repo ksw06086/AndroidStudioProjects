@@ -6,6 +6,7 @@ class FirebaseAuthUtils {
     companion object {
         private lateinit var auth : FirebaseAuth
 
+        // 로그인된 현재 나의 uid를 가져오는 함수
         fun getUid() : String {
             auth = FirebaseAuth.getInstance()
 
