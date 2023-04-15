@@ -1,18 +1,27 @@
 package kr.ac.yuhan.sun.sogating.auth
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kr.ac.yuhan.sun.sogating.MainActivity
 import kr.ac.yuhan.sun.sogating.R
 import kr.ac.yuhan.sun.sogating.utils.FirebaseRef
+import java.io.ByteArrayOutputStream
 import kotlin.math.log
 
 class JoinActivity : AppCompatActivity() {
@@ -26,17 +35,28 @@ class JoinActivity : AppCompatActivity() {
     private var city = ""
     private var age = ""
     private var uid = ""
+    lateinit var profileImage : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
 
-        val joinBtn = findViewById<Button>(R.id.joinBtn)
         // Initialize Firebase Auth
         auth = Firebase.auth
 
-        // 닉네임, 성별, 지역, 나이, UID
+        profileImage = findViewById(R.id.imageArea)
+        val getAction = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback { uri ->
+                profileImage.setImageURI(uri)
+            }
+        )
 
+        profileImage.setOnClickListener {
+            getAction.launch("image/*")
+        }
+
+        val joinBtn = findViewById<Button>(R.id.joinBtn)
         joinBtn.setOnClickListener {
 
             nickname = findViewById<TextInputEditText>(R.id.nicknameArea).text.toString()
@@ -46,34 +66,65 @@ class JoinActivity : AppCompatActivity() {
 
             val email = findViewById<TextInputEditText>(R.id.emailArea)
             val pwd = findViewById<TextInputEditText>(R.id.pwdArea)
+            val pwdchk = findViewById<TextInputEditText>(R.id.pwdChkArea)
 
-            auth.createUserWithEmailAndPassword(email.text.toString(), pwd.text.toString())
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        val user = auth.currentUser
-                        uid = user?.uid.toString()
+            if(email.text.toString().isEmpty()){
+                Toast.makeText(this, "이메일 비어있음", Toast.LENGTH_LONG).show()
+            } else if(pwd.text.toString() != pwdchk.text.toString()){
+                Toast.makeText(this, "패스워드 일치하지 않음", Toast.LENGTH_LONG).show()
+            } else {
+                auth.createUserWithEmailAndPassword(email.text.toString(), pwd.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            val user = auth.currentUser
+                            uid = user?.uid.toString()
 
-                        val userModel = UserDataModel(
-                            uid,
-                            nickname,
-                            age,
-                            gender,
-                            city
-                        )
+                            val userModel = UserDataModel(
+                                uid,
+                                nickname,
+                                age,
+                                gender,
+                                city
+                            )
 
-                        // Write a message to the database
-                        FirebaseRef.userInfoRef.child(uid).setValue(userModel)
+                            // Write a message to the database
+                            FirebaseRef.userInfoRef.child(uid).setValue(userModel)
+                            uploadImage(uid)
 
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
 
+                        }
                     }
-                }
+            }
 
+        }
+    }
+
+    private fun uploadImage(uid : String){
+        val storage = Firebase.storage
+        // Create a storage reference from our app
+        val storageRef = storage.reference.child(uid + ".png")
+
+
+        // Get the data from an ImageView as bytes
+        profileImage.isDrawingCacheEnabled = true
+        profileImage.buildDrawingCache()
+        val bitmap = (profileImage.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = storageRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
         }
     }
 }

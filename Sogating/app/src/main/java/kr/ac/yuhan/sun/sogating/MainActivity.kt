@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 // val post = dataSnapshot.getValue<Post>() <= 데이터 가져오는 것
 
                 for(dataModel in dataSnapshot.children){
-                    val user = dataSnapshot.getValue(UserDataModel::class.java)
+                    val user = dataModel.getValue(UserDataModel::class.java)
 
                     usersDataList.add(user!!)
                 }
