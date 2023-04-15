@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
+import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kr.ac.yuhan.sun.sogating.auth.IntroActivity
 import kr.ac.yuhan.sun.sogating.utils.FirebaseAuthUtils
 
 class SplashActivity : AppCompatActivity() {
+
+    private val TAG = "SplashActivity"
 
 //    private val auth = FirebaseAuth.getInstance()
 

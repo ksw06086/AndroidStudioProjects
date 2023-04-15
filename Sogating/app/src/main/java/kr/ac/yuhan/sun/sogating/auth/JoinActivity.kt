@@ -12,11 +12,13 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.ktx.storage
 import kr.ac.yuhan.sun.sogating.MainActivity
 import kr.ac.yuhan.sun.sogating.R
@@ -80,20 +82,38 @@ class JoinActivity : AppCompatActivity() {
                             val user = auth.currentUser
                             uid = user?.uid.toString()
 
-                            val userModel = UserDataModel(
-                                uid,
-                                nickname,
-                                age,
-                                gender,
-                                city
-                            )
+                            // Token 가져오기
+                            FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                                OnCompleteListener { task ->
+                                    if (!task.isSuccessful) {
+                                        Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                                        return@OnCompleteListener
+                                    }
 
-                            // Write a message to the database
-                            FirebaseRef.userInfoRef.child(uid).setValue(userModel)
-                            uploadImage(uid)
+                                    // Get new FCM registration token
+                                    val token = task.result
 
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
+                                    val userModel = UserDataModel(
+                                        uid,
+                                        nickname,
+                                        age,
+                                        gender,
+                                        city,
+                                        token
+                                    )
+
+                                    // Log and toast
+                                    Log.e(TAG, token.toString())
+
+                                    // Write a message to the database
+                                    FirebaseRef.userInfoRef.child(uid).setValue(userModel)
+                                    uploadImage(uid)
+
+                                    val intent = Intent(this, MainActivity::class.java)
+                                    startActivity(intent)
+
+                            })
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
