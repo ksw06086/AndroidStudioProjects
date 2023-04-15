@@ -47,10 +47,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 나와 다른 성별의 카드들을 가져오기
-        // 1. 내 성별 알기
-        // 2. 전체 카드 중 내 성별과 다른 카드 가져오기
-
         val setting = findViewById<ImageView>(R.id.settingIcon)
         setting.setOnClickListener {
             val intent = Intent(this, SettingActivity::class.java)
@@ -66,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onCardSwiped(direction: Direction?) {
                 if(direction == Direction.Right){
-
+                    userLikeOtherUser(uid, usersDataList[userCount].uid.toString())
                 }
 
                 if(direction == Direction.Left){
@@ -106,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         getMyData()
     }
 
+    // 내 데이터를 가져와서 성별이 다른 사용자 리스트 가져오는 부분
     private fun getMyData() {
         val myImage = findViewById<ImageView>(R.id.myImage)
 
@@ -133,6 +130,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseRef.userInfoRef.child(uid).addValueEventListener(postListener)
     }
 
+    // 사용자 전체 리스트 가져오는 부분
     private fun getUserDataList(currentUserGender : String){
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -158,5 +156,11 @@ class MainActivity : AppCompatActivity() {
         }
         FirebaseRef.userInfoRef.addValueEventListener(postListener)
 
+    }
+
+    // 유저의 좋아요를 표시하는 부분
+    // 나의 uid, 좋아요한 상대의 uid
+    private fun userLikeOtherUser(myUid : String, otherUid : String){
+        FirebaseRef.userLikeRef.child(myUid).child(otherUid).setValue("true")
     }
 }
