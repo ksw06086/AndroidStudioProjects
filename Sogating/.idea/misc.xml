@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_intro.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_join.xml" value="0.2015625" />
+        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_join.xml" value="0.2" />
+        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_login.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/item_card.xml" value="0.2" />
