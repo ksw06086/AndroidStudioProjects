@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.yuhan.sun.sogating.R
+import kr.ac.yuhan.sun.sogating.auth.UserDataModel
 
-class CardStackAdapter(val context : Context, val items : List<String>) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
+class CardStackAdapter(val context : Context, val items : List<UserDataModel>) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardStackAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view : View = inflater.inflate(R.layout.item_card, parent,false)
@@ -23,7 +24,7 @@ class CardStackAdapter(val context : Context, val items : List<String>) : Recycl
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun binding(data : String) {
+        fun binding(data : UserDataModel) {
 
         }
     }
