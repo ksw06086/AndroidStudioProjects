@@ -1,12 +1,15 @@
 package kr.ac.yuhan.sun.sogating.message
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,12 +19,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.ac.yuhan.sun.sogating.R
 import kr.ac.yuhan.sun.sogating.auth.UserDataModel
+import kr.ac.yuhan.sun.sogating.message.fcm.NotiModel
 import kr.ac.yuhan.sun.sogating.message.fcm.PushNotification
 import kr.ac.yuhan.sun.sogating.message.fcm.RetrofitInstance
 import kr.ac.yuhan.sun.sogating.utils.FirebaseAuthUtils
 import kr.ac.yuhan.sun.sogating.utils.FirebaseRef
+import kr.ac.yuhan.sun.sogating.utils.MyInfo
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 // 내가 좋아하고 상대도 나를 좋아하는 상대 리스트
+@RequiresApi(Build.VERSION_CODES.O)
 class MyMatchingListActivity : AppCompatActivity() {
 
     private val TAG = "MyMatchingListActivity"
@@ -31,6 +39,8 @@ class MyMatchingListActivity : AppCompatActivity() {
     private val likeUserList = mutableListOf<UserDataModel>()
 
     lateinit var listViewAdapter: ListViewAdapter
+    lateinit var getterUid : String
+    lateinit var getterToken : String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +62,8 @@ class MyMatchingListActivity : AppCompatActivity() {
 //        }
 
         userListView.setOnItemLongClickListener { parent, view, position, id ->
+            getterUid = likeUserList[position].uid.toString()
+            getterToken = likeUserList[position].token.toString()
             checkMatching(likeUserList[position].uid.toString())
 
             return@setOnItemLongClickListener(true)
@@ -155,7 +167,22 @@ class MyMatchingListActivity : AppCompatActivity() {
 
         val mAlertDialog = mBuilder.show()
         val btn = mAlertDialog.findViewById<Button>(R.id.sendBtnArea)
+        val textArea = mAlertDialog.findViewById<EditText>(R.id.sendTextArea)
         btn?.setOnClickListener {
+
+            val msgText = textArea!!.text.toString()
+
+            val msgModel = MsgModel(MyInfo.myNickname, msgText, LocalDateTime.now().format(
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+
+            FirebaseRef.userMsgRef.child(getterUid).child(uid).push().setValue(msgModel)
+
+            val notiModel = NotiModel(MyInfo.myNickname, msgText)
+            val pushModel = PushNotification(notiModel, getterToken)
+
+            testPush(pushModel)
+
+
             mAlertDialog.dismiss()
         }
 

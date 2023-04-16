@@ -21,6 +21,12 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/myMsgBtn"
+        android:text="my Message List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
         android:id="@+id/logoutBtn"
         android:text="logout"
         android:layout_width="match_parent"

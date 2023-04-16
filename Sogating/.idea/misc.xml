@@ -8,8 +8,10 @@
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_login.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_my_matching_list.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_my_msg.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_my_msg_list.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_my_page.xml" value="0.2" />
-        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_setting.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/activity_splash.xml" value="0.2015625" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/custom_dialog.xml" value="0.2" />
         <entry key="..\:/Users/Happy/AndroidStudioProjects/Sogating/app/src/main/res/layout/item_card.xml" value="0.2" />
@@ -26,7 +28,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.2" />
+        <option name="scale" value="0.13333333333333333" />
       </ProjectState>
     </option>
   </component>

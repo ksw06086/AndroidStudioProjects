@@ -32,6 +32,7 @@ import kr.ac.yuhan.sun.sogating.setting.SettingActivity
 import kr.ac.yuhan.sun.sogating.slider.CardStackAdapter
 import kr.ac.yuhan.sun.sogating.utils.FirebaseAuthUtils
 import kr.ac.yuhan.sun.sogating.utils.FirebaseRef
+import kr.ac.yuhan.sun.sogating.utils.MyInfo
 
 class MainActivity : AppCompatActivity() {
 
@@ -123,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                 // val post = dataSnapshot.getValue<Post>() <= 데이터 가져오는 것
                 val data = dataSnapshot.getValue(UserDataModel::class.java)
                 currentUserGender = data?.gender.toString()
+                MyInfo.myNickname = data?.nickname.toString()
 
                 getUserDataList(currentUserGender)
             }
